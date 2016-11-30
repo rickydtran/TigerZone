@@ -1,5 +1,6 @@
 // TCP connection
 const net = require('net');
+const fs = require('fs');
 
 // argv -- App params
 const argv = require('process').argv;
@@ -43,7 +44,13 @@ client.on('error', err => console.log(err));
 // This will get called every time we receive a response (res) from the TCP server
 client.on('data', (res) => {
   // Parse the server response
-  const message = TCPAdapter.parse(res);
+	console.log(res.trim());
+  const message = TCPAdapter.parse(res.trim());
+
+	if (!message) {
+		console.log('Unrecognized message: did the server crash?');
+		return false;
+	}
 
   // We need to handle each possible response from the server
   switch (message.type) {
@@ -63,6 +70,9 @@ client.on('data', (res) => {
       break;
     case 'begin-round':
 			gids = [];
+
+			fs.unlinkSync('server/ApiEndpoints/SavedGames/A.json');
+			fs.unlinkSync('server/ApiEndpoints/SavedGames/B.json');
 
       tigerzone
         .new_game('A')
@@ -126,12 +136,12 @@ client.on('data', (res) => {
 							// We can also always
 							if (message.tile[4] === 'X') {
 								tcpAdapter.place_tiger(message.gid, message.move_count, message.tile, x, y, orientation, 5);
-							} else {
+							} else if (message.move_count === 1) {
+  							tcpAdapter.place_tiger(message.gid, message.move_count, message.tile, x, y, orientation, 1);
+  						} else {
 								tcpAdapter.place_tile(message.gid, message.move_count, message.tile, x, y, orientation);
 							}
 						});
-
-
 
           return res;
         })
@@ -139,6 +149,7 @@ client.on('data', (res) => {
         .catch((data) => data);
       break;
     case 'move':
+			console.log(message);
       // Add move on behalf of opponent
       if (message.move.type !== 'place-tile' || message.pid === username) {
         break;
@@ -156,8 +167,7 @@ client.on('data', (res) => {
 			// message.move.meeple := 'none' if none was placed
 
       tigerzone
-        .place_tile(gids[message.gid], message.move.tile, message.move.x, message.move.y, message.move.orientation)
-        .catch((data) => data);
+        .force_place_tile(gids[message.gid], message.move.tile, message.move.x, message.move.y, message.move.orientation);
 
       break;
     case 'forfeit':

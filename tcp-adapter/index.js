@@ -4,6 +4,7 @@ module.exports = class TCPAdapter {
   }
 
   send(message) {
+    console.log(`[sent]: ${message}`);
     this.client.write(`${message}\r\n`);
   }
 
