@@ -67,8 +67,8 @@ client.on('data', (res) => {
       console.log(`We will be playing ${message.rounds} rounds in challenge ${message.cid}`);
       break;
     case 'begin-round':
-			fs.unlinkSync('server/ApiEndpoints/SavedGames/1.json');
-			fs.unlinkSync('server/ApiEndpoints/SavedGames/2.json');
+			fs.truncateSync('server/ApiEndpoints/SavedGames/1.json', 0);
+			fs.truncateSync('server/ApiEndpoints/SavedGames/2.json', 0);
 
       tigerzone
         .new_game('1')
