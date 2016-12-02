@@ -31,6 +31,8 @@ https://github.com/williamsd4808
 
 We decided to use client-server architecture, writing the gen server in Java, a GUI client written in javascript with Electron, a TCP adapter written in Node.js, and an AI also written in Node.js. Directories of interest in this project are `electron-client`, `server`, `tcp-adapter`, and `random-ai`.
 
+The idea is that each client (the Electron client and the AI) makes requests to the server, which maintains the game state. This allows us to easily synchronize state between clients (i.e. it's easy for a human to play against the AI and for AIs to play against each other) and allows us to write clients without knowing the details of the game (i.e. we request a list of valid placements of a certain tile instead of calculating them using the rules of TigerZone).
+
 This project should be runnable on Ubuntu 14.04 with node v6.3.1 and OpenJDK 8. There are no guarantees that any other system will work with other configurations, especially those running on Windows.
 
 ## Electron client
