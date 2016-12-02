@@ -32,15 +32,7 @@ const password = argv[6];
 // This is a cheaty method that allows us to force-set the deck
 const setDeck = require('./modules/set-deck.js');
 
-// Connect to the TCP server
-client.connect(port, ip, function() {
-	console.log('Connected');
-});
-
-client.on('error', err => console.log(err));
-
-// This will get called every time we receive a response (res) from the TCP server
-client.on('data', (res) => {
+const process = (res) => {
   // Parse the server response
 	console.log(res.trim());
   const message = TCPAdapter.parse(res.trim());
@@ -156,6 +148,7 @@ client.on('data', (res) => {
 
       break;
     case 'forfeit':
+			// fs.truncateSync(`server/ApiEndpoints/SavedGames/${message.gid}.json`, 0);
 			console.log(message);
       // Do nothing?
       break;
@@ -178,6 +171,23 @@ client.on('data', (res) => {
 		default:
 			break;
   }
+};
+
+// Connect to the TCP server
+client.connect(port, ip, function() {
+	console.log('Connected');
+});
+
+client.on('error', err => console.log(err));
+
+// This will get called every time we receive a response (res) from the TCP server
+client.on('data', (res) => {
+	res
+		.split('\n')
+		.forEach((data) => {
+			console.log(data);
+			process(data);
+		});
 });
 
 client.on('close', function() {

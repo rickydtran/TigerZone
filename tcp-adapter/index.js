@@ -120,7 +120,7 @@ module.exports = class TCPAdapter {
     }
 
     // GAME <gid> MOVE <move_count> PLAYER <pid> <move>
-    if (tokens[0] === 'GAME' && !tokens.includes('FORFEITED') && !tokens.includes('OVER')) {
+    if (tokens[0] === 'GAME' && !tokens.includes('FORFEITED:') && !tokens.includes('OVER')) {
       return {
         'type': 'move',
         'gid': tokens[1],
@@ -131,7 +131,7 @@ module.exports = class TCPAdapter {
     }
 
     // GAME <gid> MOVE <move_count> PLAYER <pid> FORFEITED: INVALID MEEPLE PLACEMENT
-    if (tokens[0] === 'GAME' && tokens.includes('FORFEITED') && !tokens.includes('OVER')) {
+    if (tokens[0] === 'GAME' && tokens.includes('FORFEITED:') && !tokens.includes('OVER')) {
       return {
         'type': 'forfeit',
         'gid': tokens[1],
@@ -142,7 +142,7 @@ module.exports = class TCPAdapter {
     }
 
     // GAME <gid> OVER PLAYER <pid> <score> PLAYER <pid> <score>
-    if (tokens[0] === 'GAME' && !tokens.includes('FORFEITED') && tokens.includes('OVER')) {
+    if (tokens[0] === 'GAME' && !tokens.includes('FORFEITED:') && tokens.includes('OVER')) {
       return {
         'type': 'game-over',
         'gid': tokens[1],
