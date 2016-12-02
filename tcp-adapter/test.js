@@ -35,4 +35,4 @@ THANK YOU FOR PLAYING! GOODBYE`.split('\n');
 
 seed
   .map(line => Adapter.parse(line))
-  .forEach(msg => console.log(msg));
+  .forEach(msg => console.log(JSON.stringify(msg, 2)));

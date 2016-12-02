@@ -86,7 +86,7 @@ module.exports = class TCPAdapter {
         'tile': tokens[3],
         'x': parseInt(tokens[5], 10),
         'y': parseInt(tokens[6], 10),
-        'orientation': (4 - parseInt(tokens[7], 10) / 90) % 4
+        'orientation': parseInt(tokens[7], 10) / 90
       };
     }
 
@@ -204,7 +204,7 @@ module.exports = class TCPAdapter {
         'tile': tokens[1],
         'x': parseInt(tokens[3], 10),
         'y': parseInt(tokens[4], 10),
-        'orientation': (4 - parseInt(tokens[5], 10) / 90) % 4,
+        'orientation': parseInt(tokens[5], 10) / 90,
         'meeple': meeple
       };
     }

@@ -35,17 +35,6 @@ exec(`java -classpath "lib/javax.json-1.0.jar:server" ApiEndpoints.NewGame perf-
 
 
 
-console.time('tigerzone-exec-elixir');
-exec(`ex_server/ex_server new-game perf-test`, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.timeEnd('tigerzone-exec-elixir');
-});
-
-
-
 console.time('hdd read/write');
 let board = require(`./../server/ApiEndpoints/SavedGames/perf-test.json`);
 board.Deck.tiles = [];

@@ -121,7 +121,7 @@ We provide a test server, which runs on 127.0.0.1:9000. To use it, just send the
 TigerZone$ node tcp-adapter/test-server
 ```
 
-To prove that the adapter works, we typically just pipe examples from the protocol to the test server.
+To prove that the adapter works, we typically just pipe examples from the protocol to the test server. Timestamps are also included for perf purposes.
 
 ## Testing
 
@@ -131,10 +131,11 @@ To prove that the adapter works, we typically just pipe examples from the protoc
 TigerZone$ node perf
 ```
 
-### Client tests
+### Node TCP Adapter tests
 
+This will print an example challenge that has been parsed. Any errors will get thrown, so a successful test has none.
 ```shell
-TigerZone$ node electron-tests
+TigerZone$ node tcp-adapter/test
 ```
 
 ## Meeples/Tigers
