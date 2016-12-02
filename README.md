@@ -83,7 +83,6 @@ TigerZone$ bash server/ApiEndpoints/new-game game_id
 ```shell
 TigerZone$ bash server/ApiEndpoints/join-game game_id player_id
 ```
-```
 
 #### get-moves
 
