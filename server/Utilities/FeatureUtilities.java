@@ -39,37 +39,34 @@ public class FeatureUtilities {
 
     }
 
-    // getNeighborFeatures => getNeighboringSupertiles
+    public static Map<Point, Feature> getNeighborFeatures(Board board, Point point) {
 
-    public static Map<Point, Feature> getNeighborFeatures(Board board, Point superpoint) {
+        Map<Point, Feature> neighborFeatures = new HashMap<>();
 
-        Map<Point, Feature> neighboringSupertiles = new HashMap<>();
-
-        // We want to grab
         for (Board.Orientation orientation : Board.Orientation.values()) {
 
-            Point rawOrientedPoint = neighborTilesTransform.get(orientation).Transform(superpoint);
-            Point orientedSubpoint = getLocalFeaturePoint(rawOrientedSuperpoint);
-            Point orientedPoint = getGlobalTilePoint(rawOrientedSuperpoint);
+            Point rawOrientedFeaturePoint = neighborTilesTransform.get(orientation).Transform(point);
+            Point orientedFeaturePoint = getLocalFeaturePoint(rawOrientedFeaturePoint);
+            Point orientedPlacedTile = getGlobalTilePoint(rawOrientedFeaturePoint);
 
-            if (board.containsElement(orientedSuperpoint)) {
+            if (board.containsElement(orientedPlacedTile)) {
 
-                Board.PlacedTile placedTile = board.getTile(orientedPoint);
-                neighboringSupertiles.put(rawOrientedPoint, placedTile.getFeature(orientedSubpoint));
+                Board.PlacedTile placedTile = board.getTile(orientedPlacedTile);
+                neighborFeatures.put(rawOrientedFeaturePoint, placedTile.getFeature(orientedFeaturePoint));
 
             }
 
         }
 
-        return neighboringSupertiles;
+        return neighborFeatures;
 
     }
 
     // Expects: the board you intend to find the extent of
     // Expects: a start point in terms of global feature locations
     // Expects: the type of feature you are trying to find the extent of
+    // Returns a map of global feature points that are connected to this feature on this start point
 
-    // getFloodplain
     public static Set<Point> getExtentOfFeature(Board board, Point startFeaturePoint, Feature featureType) {
 
         HashSet<Point> featureExtent = new HashSet<>();
@@ -215,7 +212,6 @@ public class FeatureUtilities {
 
         Point globalTilePoint = getGlobalTilePoint(point);
 
-        // return new Point(point.x - globalTilePoint.x * 5, point.y - globalTilePoint.y * 5)
         return new Point(5 - ((globalTilePoint.x + 1) * 5 - point.x), 5 - ((globalTilePoint.y + 1) * 5 - point.y));
 
     }
