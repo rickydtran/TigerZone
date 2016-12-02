@@ -1,5 +1,31 @@
 # TigerZone
 
+## The Team
+
+### Team Q
+
+#### James Steele
+
+https://github.com/Zubry
+
+#### Austin Seber
+
+https://github.com/aseber
+
+#### Ricky Tran
+
+https://github.com/rickydtran
+
+#### Jay Wang
+
+https://github.com/jw6
+
+#### Patrick Bradley
+
+#### Daniel Williams
+
+https://github.com/williamsd4808
+
 ## Project structure
 
 We decided to use client-server architecture, writing the gen server in Java, a GUI client written in javascript with Electron, a TCP adapter written in Node.js, and an AI also written in Node.js. Directories of interest in this project are `electron-client`, `server`, `tcp-adapter`, and `random-ai`.
