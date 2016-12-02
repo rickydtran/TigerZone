@@ -114,4 +114,4 @@ TigerZone$ node electron-tests
 We scale up to a 5x5 subgrid in order to solve the problem of jungles being errantly separated each other by a lake. We also introduce a "hole" subtile that acts as a blocker for the flood fill, allowing us to have us to have 2 jungles and 2 lakes instead of 1 jungle and 2 lakes or 2 jungles and 1 lake.
 
 We also have to select 9 subtiles to act as our tiger tiles, and we chose those below.
-![Demo pic](http://i.imgur.com/ePJMYW7.png)
+![Demo pic](http://imgur.com/O4aHgMM.png)
