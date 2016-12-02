@@ -72,13 +72,13 @@ client.on('data', (res) => {
 
       tigerzone
         .new_game('1')
-        .catch(data => console.log(data))
+        .catch(data => data)
         .then(() => tigerzone.join_game('1', username))
         .catch(data => data);
 
       tigerzone
         .new_game('2')
-        .catch(data => console.log(data))
+        .catch(data => data)
         .then(() => tigerzone.join_game('2', username))
         .catch(data => data);
 

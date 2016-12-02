@@ -2,11 +2,14 @@ package Utilities;
 
 import GameState.Board;
 import GameState.Tile;
+import GameState.Feature;
 
 import java.awt.*;
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by asebe on 11/10/2016.
@@ -17,10 +20,10 @@ public class TileUtilities {
 
         {
 
-            put(Board.Orientation.NORTH, Tuple.Create(new Point(0, 2), new Point(4, 2)));
-            put(Board.Orientation.EAST, Tuple.Create(new Point(2, 4), new Point(2, 0)));
-            put(Board.Orientation.SOUTH, Tuple.Create(new Point(4, 2), new Point(0, 2)));
-            put(Board.Orientation.WEST, Tuple.Create(new Point(2, 0), new Point(2, 4)));
+            put(Board.Orientation.NORTH, Tuple.Create(new Point(2, 0), new Point(2, 4)));
+            put(Board.Orientation.EAST, Tuple.Create(new Point(4, 2), new Point(0, 2)));
+            put(Board.Orientation.SOUTH, Tuple.Create(new Point(2, 4), new Point(2, 0)));
+            put(Board.Orientation.WEST, Tuple.Create(new Point(0, 2), new Point(4, 2)));
 
         }
 
@@ -90,6 +93,47 @@ public class TileUtilities {
         Tuple<Point, Point> points = connectionHashMap.get(directionFromPlacedTile);
 
         return placedTile.getFeature(points.item1) == newPlacedTile.getFeature(points.item2);
+
+    }
+
+    public static ArrayList<Set<Point>> getExtentsForTile(Board board, Board.PlacedTile placedTile) {
+
+        ArrayList<Set<Point>> extentCollection = new ArrayList<>();
+        ArrayList<Point> globalFeaturePointsInNewTile = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+
+            for (int j = 0; j < 5; j++) {
+
+                globalFeaturePointsInNewTile.add(FeatureUtilities.getGlobalFeaturePoint(placedTile, new Point(i, j)));
+
+            }
+
+        }
+
+        while (!globalFeaturePointsInNewTile.isEmpty()) {
+
+            Point removedPoint = globalFeaturePointsInNewTile.get(0);
+            globalFeaturePointsInNewTile.remove(0);
+
+            Point removedLocalFeaturePoint = FeatureUtilities.getLocalFeaturePoint(removedPoint);
+            Point removedGlobalTilePoint = FeatureUtilities.getGlobalTilePoint(removedPoint);
+
+            Feature removedFeature = board.getTile(removedGlobalTilePoint).getFeature(removedLocalFeaturePoint);
+
+            Set<Point> featureExtent = FeatureUtilities.getExtentOfFeature(board, removedPoint, removedFeature);
+
+            for (Point featureExtentPoint : featureExtent) {
+
+                globalFeaturePointsInNewTile.remove(featureExtentPoint); // Attempt to remove elements of this extent from the points in the new tile as they have already been accounted for
+
+            }
+
+            extentCollection.add(featureExtent);
+
+        }
+
+        return extentCollection;
 
     }
 
