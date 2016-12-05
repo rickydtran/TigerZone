@@ -8,7 +8,7 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-public class DeckTest {
+public class PlayerTest {
 
     @org.junit.Test(expected=RuntimeException.class)
     public void getNameDefault() throws Exception {

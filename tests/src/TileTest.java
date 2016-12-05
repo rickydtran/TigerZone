@@ -9,7 +9,7 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-public class DeckTest {
+public class TileTest {
 
     @org.junit.Test(expected = RuntimeException.class)
     public void getValidTile() throws Exception {
