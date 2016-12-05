@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class DeckTest {
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void testDrawTile() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -19,7 +19,7 @@ public class DeckTest {
        engine1.deck.drawTile();
     }
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void isHasTileToDraw() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -28,7 +28,7 @@ public class DeckTest {
        engine1.deck.hasTileToDraw();
     }
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void testAddTile() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -38,7 +38,7 @@ public class DeckTest {
        engine1.deck.addTilesToPicker(tilePicker, new Tile("TJTT-"), 4);
     }
 
-    @org.junit.Test;
+    @org.junit.Test
     public void isLoadingJson() {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -48,7 +48,7 @@ public class DeckTest {
        engine1.deck.fromJson(engine1, json);
     }
 
-    @org.junit.Test;
+    @org.junit.Test
     public void isSendingJson() {
        Engine engine1 = new Engine();
        Random testNumber = new Random();

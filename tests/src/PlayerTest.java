@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class DeckTest {
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void getNameDefault() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -19,7 +19,7 @@ public class DeckTest {
        engine1.player.Player();
     }
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void getNameOverLoadedConstructor() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -29,7 +29,7 @@ public class DeckTest {
        engine1.player.Player(name);
     }
 
-    @org.junit.Test(expected=RuntimeException.class);
+    @org.junit.Test(expected=RuntimeException.class)
     public void isPlaceMeeple() throws Exception {
        Engine engine1 = new Engine();
        Random testNumber = new Random();
@@ -38,7 +38,7 @@ public class DeckTest {
        engine1.player.placeMeeple();
     }
 
-    @org.junit.Test();
+    @org.junit.Test()
     public void validName(){
        Engine engine1 = new Engine();
        Random testNumber = new Random();
