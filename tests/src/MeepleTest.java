@@ -15,6 +15,6 @@ public class MeepleTest {
     public void getValidTile() {
       Player p = new Player();
       Meeple m = new Meeple(p);
-      assertEquals(p, m);
+      assertEquals(m.getOwner(), p);
     }
 }
